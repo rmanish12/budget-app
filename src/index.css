@@ -1,0 +1,121 @@
+.background {
+    background-color: teal !important;
+}
+
+.color {
+    color: teal !important;
+}
+
+label {
+    color: teal !important;
+}
+
+.flex-1 {
+    flex-grow: 1;
+}
+
+.all-caps {
+    font-variant: all-petite-caps;
+}
+
+.back-image {
+    background-image: url("./assets/images/budget.jpg");
+    background-color: wheat;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.mt-10 {
+    margin-top: 10% !important;
+}
+
+.wd-90 {
+    width: 90%;
+}
+
+.wd-95 {
+    width: 95%
+}
+
+.mt-2 {
+    margin-top: 2% !important;
+}
+
+.pd-4 {
+    padding-bottom: 4%;
+}
+
+.pd-1 {
+    padding-bottom: 1%;
+}
+
+.mt-minus-25 {
+    margin-top: -25px !important;
+}
+
+.mt-minus-2 {
+    margin-top: -2% !important;
+}
+
+.mb-10{
+    margin-bottom: 10px !important;
+}
+
+.form-border {
+    border: 2px teal solid !important
+}
+
+.form-heading {
+    padding: 2%;
+    color: white;
+    font-size: large;
+}
+
+.login-button {
+    color: white !important;
+    width: 90%;
+    margin-bottom: 10px !important;
+}
+
+.form-error {
+    margin-left: 5%;
+    font-size: smaller;
+    color: red;
+}
+
+.form-option {
+    font-style: italic;
+    font-variant: all-petite-caps;
+}
+
+.form-option:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.form-label {
+    padding-left: 5% !important;
+    margin-top: 2%;
+    font-size: small !important;
+}
+
+.form-dropdown {
+    margin-left: 5%;
+    width: 90%;
+}
+
+.reset-button {
+    margin-left: 5% !important;
+    width: 40%;
+    color: teal !important;
+    margin-bottom: 10px !important;
+}
+
+.register-button {
+    margin-left: 10% !important;
+    width: 40%;
+    color: white !important;
+    margin-bottom: 10px !important;
+}
