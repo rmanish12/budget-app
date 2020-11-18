@@ -5,10 +5,7 @@ import Login from '../../components/login'
 import { connect } from 'react-redux'
 import { onLogin } from '../../store/actions/user'
 
-interface ILoginContainerProps {
-    openRegisterForm: React.MouseEventHandler<HTMLButtonElement>;
-    onLogin: Function
-}
+import { ILoginContainerProps } from '../types'
 
 const login: React.FC<ILoginContainerProps> = (props): JSX.Element  => {
 

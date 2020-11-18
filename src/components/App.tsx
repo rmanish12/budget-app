@@ -1,16 +1,22 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
+import { connect } from "react-redux";
 
 import "../index.css";
 
-import Navbar from "./navbar";
-import Main from "../containers/main"
-import Home from "../containers/home"
+import Navbar from "../containers/navbar";
+import Main from "../containers/main";
+import Home from "../containers/home";
 
-const App = (): JSX.Element => {
+import { IAppProps } from './types'
+
+const App: React.FC<IAppProps> = (props): JSX.Element => {
+  
+  const { isAuthenticated, firstName } = props.user;
+
   return (
     <>
-      <Navbar />
+      <Navbar isAuthenticated={isAuthenticated} firstName={firstName} />
       <Switch>
         <Route path="/" exact component={Main}></Route>
         <Route path="/home" component={Home}></Route>
@@ -19,4 +25,10 @@ const App = (): JSX.Element => {
   );
 };
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+
+export default connect(mapStateToProps)(App);

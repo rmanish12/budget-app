@@ -11,22 +11,7 @@ import {
   MenuItem,
 } from "@material-ui/core";
 
-interface IRegisterComponentProps {
-  state: {
-    firstName?: string;
-    lastName?: string;
-    email?: string;
-    password?: string;
-    confirmPassword?: string;
-    dateOfBirth?: string;
-    gender?: string;
-    error?: any;
-  };
-  onChangeHandler?: React.ChangeEventHandler<HTMLInputElement>;
-  onFormSubmit?: React.MouseEventHandler<HTMLButtonElement>;
-  onFormReset?: React.MouseEventHandler<HTMLButtonElement>;
-  openLoginForm?: React.MouseEventHandler<HTMLButtonElement>
-}
+import { IRegisterComponentProps } from '../types'
 
 const register: React.FC<IRegisterComponentProps> = (props): JSX.Element => {
   const {

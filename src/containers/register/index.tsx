@@ -14,47 +14,9 @@ import {
 
 import AlertItem from "../../components/alert";
 
-interface IRegisterState {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-  gender: string;
-  dateOfBirth: string;
-  error: {
-    firstName: boolean;
-    lastName: boolean;
-    email: boolean;
-    password: boolean;
-    confirmPassword: boolean;
-  };
-  registerSuccess: string;
-  registerFailure: string;
-}
+import { IRegisterState, IRegisterContainerProps } from '../types'
 
-interface IRegisterContainerProps {
-  openLoginForm: React.MouseEventHandler<HTMLButtonElement>;
-}
-
-const initialState = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  password: "",
-  confirmPassword: "",
-  gender: "Male",
-  dateOfBirth: formatDate(new Date("01/01/1990")),
-  error: {
-    firstName: false,
-    lastName: false,
-    email: false,
-    password: false,
-    confirmPassword: false,
-  },
-  registerSuccess: "",
-  registerError: "",
-};
+import initialState from './initialState'
 
 class Register extends Component<
   IRegisterContainerProps,

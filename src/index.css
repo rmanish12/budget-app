@@ -119,3 +119,17 @@ label {
     color: white !important;
     margin-bottom: 10px !important;
 }
+
+.MuiDrawer-paper {
+    width: 20% !important;
+}
+
+.drawer-menu {
+    position: absolute;
+    bottom: 10px;
+}
+
+.drawer-menu-item:hover {
+    color: teal;
+    cursor: pointer;
+}

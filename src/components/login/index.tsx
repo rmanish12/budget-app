@@ -3,15 +3,7 @@ import "../../index.css";
 
 import { Grid, Paper, TextField, Button } from "@material-ui/core";
 
-interface ILoginProps {
-  email : string,
-  password: string,
-  error: string,
-  onEmailChange: React.ChangeEventHandler<HTMLInputElement>,
-  onPasswordChange: React.ChangeEventHandler<HTMLInputElement>,
-  onFormSubmit: React.MouseEventHandler<HTMLButtonElement>,
-  openRegisterForm: React.MouseEventHandler<HTMLButtonElement>
-}
+import { ILoginProps } from '../types'
 
 const login: React.FC<ILoginProps> = (props): JSX.Element => {
   const { email, password, onEmailChange, onPasswordChange, error, onFormSubmit, openRegisterForm } = props;

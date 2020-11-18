@@ -10,14 +10,33 @@ import {
 import MenuIcon from "@material-ui/icons/Menu";
 import "../../index.css";
 
-const navbar = (props): JSX.Element => {
+import SideDrawer from "../sideDrawer";
+
+import { INavbarComponentProps } from '../types'
+
+const navbar: React.FC<INavbarComponentProps> = (props): JSX.Element => {
+  const { isAuthenticated, toggleDrawer, isDrawerOpen, firstName } = props;
+
   return (
     <>
       <AppBar position="static" className="background">
         <Toolbar>
-          <IconButton edge="start" color="inherit" aria-label="menu">
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            onClick={() => toggleDrawer(true)}
+          >
             <MenuIcon />
           </IconButton>
+
+          <SideDrawer
+            isAuthenticated={isAuthenticated}
+            toggleDrawer={toggleDrawer}
+            isDrawerOpen={isDrawerOpen}
+            firstName={firstName}
+          />
+
           <Typography variant="h6" className="flex-1 all-caps">
             Budget App
           </Typography>

@@ -5,11 +5,7 @@ import { Snackbar } from "@material-ui/core";
 
 import "../../index.css";
 
-interface IAlertProps {
-  message: string;
-  closeAlert: React.MouseEventHandler<HTMLButtonElement>;
-  severity: any;
-}
+import { IAlertProps } from '../types'
 
 const alertItem: React.FC<IAlertProps> = (props): JSX.Element => {
   const { message, closeAlert, severity } = props;
