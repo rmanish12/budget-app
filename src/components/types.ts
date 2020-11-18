@@ -51,3 +51,29 @@ export interface ISideDrawerProps {
   isAuthenticated: boolean;
   firstName: string
 }
+
+export interface IUserProfileComponentProps {
+  state: {
+      firstName: string,
+      lastName: string,
+      email: string,
+      gender: string,
+      dateOfBirth: string,
+      error: {
+          firstName: boolean
+      }
+  };
+  onChangeHandler: React.ChangeEventHandler<HTMLInputElement>;
+  onFormSubmit: React.MouseEventHandler<HTMLButtonElement>
+}
+
+export interface IChangePasswordComponentProps {
+  state: {
+    oldPassword: string,
+    newPassword: string,
+    confirmPassword: string,
+    error: string
+  },
+  onChangeHandler: React.ChangeEventHandler<HTMLInputElement>,
+  onFormSubmit: React.MouseEventHandler<HTMLButtonElement>
+}

@@ -7,6 +7,8 @@ import "../index.css";
 import Navbar from "../containers/navbar";
 import Main from "../containers/main";
 import Home from "../containers/home";
+import UserProfile from "../containers/userProfile"
+import ChangePassword from "../containers/changePassword"
 
 import { IAppProps } from './types'
 
@@ -20,6 +22,8 @@ const App: React.FC<IAppProps> = (props): JSX.Element => {
       <Switch>
         <Route path="/" exact component={Main}></Route>
         <Route path="/home" component={Home}></Route>
+        <Route path="/profile" component={UserProfile}></Route>
+        <Route path="/changePassword" component={ChangePassword}></Route>
       </Switch>
     </>
   );

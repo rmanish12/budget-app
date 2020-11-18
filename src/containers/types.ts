@@ -5,7 +5,7 @@ export interface ILoginContainerProps {
 
 export interface INavbarContainerProps {
   isAuthenticated: boolean;
-  firstName: string
+  firstName: string;
 }
 
 export interface IRegisterState {
@@ -29,4 +29,15 @@ export interface IRegisterState {
 
 export interface IRegisterContainerProps {
   openLoginForm: React.MouseEventHandler<HTMLButtonElement>;
+}
+
+export interface IUserProfileProps {
+  getProfile: Function;
+  user: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    gender: string;
+    dateOfBirth: string;
+  };
 }

@@ -133,3 +133,12 @@ label {
     color: teal;
     cursor: pointer;
 }
+
+a {
+    color: black;
+    text-decoration-line: none;
+}
+
+.MuiListItem-root {
+    font-style: italic;
+}

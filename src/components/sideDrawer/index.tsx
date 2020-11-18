@@ -13,6 +13,8 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import LockIcon from "@material-ui/icons/Lock";
 
+import { Link } from "react-router-dom";
+
 import "../../index.css";
 
 import { ISideDrawerProps } from "../types";
@@ -88,19 +90,24 @@ const sideDrawer: React.FC<ISideDrawerProps> = (props): JSX.Element => {
       <Divider />
       <div role="presentation" className="drawer-menu">
         <List>
-          <ListItem className="drawer-menu-item">
-            <ListItemIcon>
-              <AccountCircleIcon />
-            </ListItemIcon>
-            <ListItemText primary={"PROFILE"}></ListItemText>
-          </ListItem>
+          <Link to="/profile">
+            <ListItem className="drawer-menu-item">
+              <ListItemIcon>
+                <AccountCircleIcon />
+              </ListItemIcon>
+              <ListItemText primary={"PROFILE"}></ListItemText>
+            </ListItem>
+          </Link>
 
-          <ListItem className="drawer-menu-item">
-            <ListItemIcon>
-              <LockIcon />
-            </ListItemIcon>
-            <ListItemText primary={"CHANGE PASSWORD"}></ListItemText>
-          </ListItem>
+          <Link to="/changePassword">
+            <ListItem className="drawer-menu-item">
+              <ListItemIcon>
+                <LockIcon />
+              </ListItemIcon>
+              <ListItemText primary={"CHANGE PASSWORD"}></ListItemText>
+            </ListItem>
+          </Link>
+
           <ListItem className="drawer-menu-item">
             <ListItemIcon>
               <ExitToAppIcon />
