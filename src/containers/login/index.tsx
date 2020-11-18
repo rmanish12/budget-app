@@ -2,13 +2,17 @@ import React, { useState } from 'react'
 
 import Login from '../../components/login'
 
+import { connect } from 'react-redux'
+import { onLogin } from '../../store/actions/user'
+
 interface ILoginContainerProps {
-    openRegisterForm: React.MouseEventHandler<HTMLButtonElement>
+    openRegisterForm: React.MouseEventHandler<HTMLButtonElement>;
+    onLogin: Function
 }
 
 const login: React.FC<ILoginContainerProps> = (props): JSX.Element  => {
 
-    const { openRegisterForm } = props
+    const { openRegisterForm, onLogin } = props
 
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
@@ -27,6 +31,13 @@ const login: React.FC<ILoginContainerProps> = (props): JSX.Element  => {
         console.log('form submitted: ', email, password)
         if(!email && !password) {
             onErrorChange('Please provide username and password')
+        } else {
+            const user = {
+                email,
+                password
+            }
+
+            onLogin(user)
         }
     }
 
@@ -49,4 +60,10 @@ const login: React.FC<ILoginContainerProps> = (props): JSX.Element  => {
     )
 }
 
-export default login
+const mapDispatchToAction = dispatch => {
+    return {
+        onLogin: (user) => dispatch(onLogin(user))
+    }
+}
+
+export default connect(null, mapDispatchToAction)(login)

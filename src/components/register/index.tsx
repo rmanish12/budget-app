@@ -179,7 +179,7 @@ const register: React.FC<IRegisterComponentProps> = (props): JSX.Element => {
               </div>
 
               <div className="text-center pd-1">
-                <span className="color form-option" onClick={openLoginForm}>Sign In?</span>
+                <span className="color form-option" onClick={openLoginForm}>Already Registered?</span>
               </div>
             </Paper>
           </div>

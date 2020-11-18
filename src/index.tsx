@@ -1,13 +1,23 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { BrowserRouter } from 'react-router-dom'
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
 
-import App from './components/App'
+import axios from 'axios'
 
-const root = document.getElementById('root')
+import App from "./components/App";
+
+import store from "./store"
+
+const root = document.getElementById("root");
+
+axios.defaults.baseURL = "http://localhost:8080"
 
 ReactDOM.render(
-<BrowserRouter>
-    <App />
-</BrowserRouter>,
-root)
+  <Provider store={store}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>,
+  root
+);

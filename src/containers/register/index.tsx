@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import autobind from "react-autobind";
+import axios from "axios";
 
 import RegisterForm from "../../components/register";
 
@@ -10,6 +11,8 @@ import {
   validateFirstName,
   validateConfirmPassword,
 } from "../../util/validator";
+
+import AlertItem from "../../components/alert";
 
 interface IRegisterState {
   firstName: string;
@@ -26,10 +29,12 @@ interface IRegisterState {
     password: boolean;
     confirmPassword: boolean;
   };
+  registerSuccess: string;
+  registerFailure: string;
 }
 
 interface IRegisterContainerProps {
-  openLoginForm: React.MouseEventHandler<HTMLButtonElement>
+  openLoginForm: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 const initialState = {
@@ -47,9 +52,14 @@ const initialState = {
     password: false,
     confirmPassword: false,
   },
+  registerSuccess: "",
+  registerError: "",
 };
 
-class Register extends Component<IRegisterContainerProps, Partial<IRegisterState>> {
+class Register extends Component<
+  IRegisterContainerProps,
+  Partial<IRegisterState>
+> {
   constructor(props) {
     super(props);
 
@@ -68,7 +78,44 @@ class Register extends Component<IRegisterContainerProps, Partial<IRegisterState
 
   // on form submit
   onFormSubmit(e: React.MouseEvent<HTMLButtonElement>) {
-    this.validateFields()
+    // discarding error
+    this.setState({
+      registerFailure: "",
+      registerSuccess: "",
+    });
+
+    if (this.validateFields()) {
+      const {
+        firstName,
+        lastName,
+        email,
+        password,
+        gender,
+        dateOfBirth,
+      } = this.state;
+
+      const user = {
+        firstName,
+        lastName,
+        email,
+        password,
+        gender,
+        dateOfBirth,
+      };
+
+      axios
+        .post("/register", user)
+        .then((res) => {
+          this.setState({
+            registerSuccess: res.data.message,
+          });
+        })
+        .catch((err) => {
+          this.setState({
+            registerFailure: err.response.data.error,
+          });
+        });
+    }
   }
 
   // on form reset
@@ -77,7 +124,7 @@ class Register extends Component<IRegisterContainerProps, Partial<IRegisterState
   }
 
   // form validation
-  validateFields() {
+  validateFields(): boolean {
     const { email, password, confirmPassword, firstName } = this.state;
 
     if (
@@ -135,12 +182,28 @@ class Register extends Component<IRegisterContainerProps, Partial<IRegisterState
           };
         });
       }
+
+      return false;
     }
+  }
+
+  // on alert close
+  closeAlert(e: React.MouseEvent<HTMLButtonElement>) {
+    this.setState({
+      registerFailure: "",
+      registerSuccess: "",
+    });
   }
 
   render(): JSX.Element {
     return (
       <>
+        <AlertItem
+          message={this.state.registerSuccess}
+          closeAlert={this.closeAlert}
+          severity={"success"}
+        />
+
         <RegisterForm
           state={this.state}
           onChangeHandler={this.onChangeHandler}

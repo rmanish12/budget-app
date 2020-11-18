@@ -62,7 +62,7 @@ const login: React.FC<ILoginProps> = (props): JSX.Element => {
                 </div>
 
                 <div className="text-center pd-1">
-                  <span className="color form-option" onClick={openRegisterForm}>Already registered?</span>
+                  <span className="color form-option" onClick={openRegisterForm}>Create Account?</span>
                 </div>
               </Paper>
             </div>
