@@ -10,6 +10,8 @@ import Home from "../containers/home";
 import UserProfile from "../containers/userProfile"
 import ChangePassword from "../containers/changePassword"
 
+import ProtectedRoute from './ProtectedRoute'
+
 import { IAppProps } from './types'
 
 const App: React.FC<IAppProps> = (props): JSX.Element => {
@@ -21,7 +23,8 @@ const App: React.FC<IAppProps> = (props): JSX.Element => {
       <Navbar isAuthenticated={isAuthenticated} firstName={firstName} />
       <Switch>
         <Route path="/" exact component={Main}></Route>
-        <Route path="/home" component={Home}></Route>
+        {/* <Route path="/home" component={Home}></Route> */}
+        <ProtectedRoute path="/home" isAuthenticated={isAuthenticated} Component={Home}></ProtectedRoute>
         <Route path="/profile" component={UserProfile}></Route>
         <Route path="/changePassword" component={ChangePassword}></Route>
       </Switch>

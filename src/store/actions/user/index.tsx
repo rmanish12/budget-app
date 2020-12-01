@@ -16,18 +16,18 @@ import {
 } from "./types";
 
 export const onLogin = (user: User) => (dispatch) => {
-  console.log("user: ", user);
+  
   axios
-    .post("/login", user)
+    .post("/user/login", user)
     .then((res) => {
-      document.cookie = `sessionToken=${res.data.token}`;
+      document.cookie = `sessionToken=${res.data.authToken}`;
 
       const action: LoginSuccessAction = {
         type: LOGIN_SUCCESS,
         payload: {
-          userId: res.data.userId,
-          firstName: res.data.firstName,
-          role: res.data.role,
+          userId: res.data.user.id,
+          firstName: res.data.user.firstName,
+          role: res.data.user.role,
         },
       };
 
@@ -44,6 +44,39 @@ export const onLogin = (user: User) => (dispatch) => {
       dispatch(action);
     });
 };
+
+export const authenticateUser = () => dispatch => {
+  const token = document.cookie.split("=")[1];
+
+  axios
+    .get("/user/who", {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    .then(res => {
+      const action: LoginSuccessAction = {
+        type: LOGIN_SUCCESS,
+        payload: {
+          userId: res.data.user.id,
+          firstName: res.data.user.firstName,
+          role: res.data.user.role,
+        },
+      };
+
+      dispatch(action);
+    })
+    .catch((err) => {
+      const action: FailureAction = {
+        type: LOGIN_FAILURE,
+        payload: {
+          error: err.response.data.error,
+        },
+      };
+
+      dispatch(action);
+    });
+}
 
 export const getProfile = () => (dispatch) => {
   const token = document.cookie.split("=")[1];

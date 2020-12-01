@@ -1,3 +1,10 @@
+import { Component } from "react";
+
+export interface IProtectedRouteProps {
+  Component: any,
+  isAuthenticated: boolean
+}
+
 export interface IAppProps {
   user: {
     isAuthenticated: boolean;
@@ -9,6 +16,7 @@ export interface IAlertProps {
   message: string;
   closeAlert: React.MouseEventHandler<HTMLButtonElement>;
   severity: any;
+  openLoginForm?: React.MouseEventHandler<HTMLButtonElement>
 }
 
 export interface ILoginProps {

@@ -23,58 +23,7 @@ const DIRECTION = "left";
 
 const sideDrawer: React.FC<ISideDrawerProps> = (props): JSX.Element => {
   const { toggleDrawer, isDrawerOpen, isAuthenticated, firstName } = props;
-
-  const list1 = () => (
-    <div
-      role="presentation"
-      onClick={() => toggleDrawer(false)}
-      onKeyDown={() => toggleDrawer(false)}
-    >
-      <List>
-        <ListItem>
-          <span>Hello</span>
-        </ListItem>
-      </List>
-
-      <List>
-        <ListItem>
-          <span>Hello</span>
-        </ListItem>
-      </List>
-
-      <List>
-        <ListItem>
-          <span>Hello</span>
-        </ListItem>
-      </List>
-      {isAuthenticated ? (
-        <>
-          <List>
-            {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
-          </List>
-          <Divider />
-          <List>
-            {["All mail", "Trash", "Spam"].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
-          </List>
-        </>
-      ) : null}
-    </div>
-  );
-
+  console.log('props: ', props)
   const list = () => (
     <>
       <div role="presentation" className="background">
@@ -119,6 +68,32 @@ const sideDrawer: React.FC<ISideDrawerProps> = (props): JSX.Element => {
     </>
   );
 
+  const ifNotAuthenticated = () => (
+    <>
+         <div role="presentation" className="drawer-menu">
+        <List>
+
+          {/* <Link to="/changePassword"> */}
+            <ListItem className="drawer-menu-item">
+              <ListItemIcon>
+                <LockIcon />
+              </ListItemIcon>
+              <ListItemText primary={"LOGIN"}></ListItemText>
+            </ListItem>
+          {/* </Link> */}
+
+          <ListItem className="drawer-menu-item">
+            <ListItemIcon>
+              <ExitToAppIcon />
+            </ListItemIcon>
+            <ListItemText primary={"REGISTER"}></ListItemText>
+          </ListItem>
+        </List>
+
+      </div>
+    </>
+  )
+
   return (
     <div>
       <React.Fragment key={DIRECTION}>
@@ -127,7 +102,7 @@ const sideDrawer: React.FC<ISideDrawerProps> = (props): JSX.Element => {
           open={isDrawerOpen}
           onClose={() => toggleDrawer(false)}
         >
-          {list()}
+          {isAuthenticated ? list() : ifNotAuthenticated()}
         </Drawer>
       </React.Fragment>
     </div>

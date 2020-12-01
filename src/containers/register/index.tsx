@@ -14,9 +14,9 @@ import {
 
 import AlertItem from "../../components/alert";
 
-import { IRegisterState, IRegisterContainerProps } from '../types'
+import { IRegisterState, IRegisterContainerProps } from "../types";
 
-import initialState from './initialState'
+import initialState from "./initialState";
 
 class Register extends Component<
   IRegisterContainerProps,
@@ -66,22 +66,25 @@ class Register extends Component<
       };
 
       axios
-        .post("/register", user)
+        .post("/user/register", user)
         .then((res) => {
+          
+          this.onFormReset()
+
           this.setState({
             registerSuccess: res.data.message,
           });
         })
         .catch((err) => {
           this.setState({
-            registerFailure: err.response.data.error,
+            registerFailure: err.response.data.message,
           });
         });
     }
   }
 
   // on form reset
-  onFormReset(e: React.MouseEvent<HTMLButtonElement>) {
+  onFormReset() {
     this.setState({ ...initialState });
   }
 
@@ -164,6 +167,13 @@ class Register extends Component<
           message={this.state.registerSuccess}
           closeAlert={this.closeAlert}
           severity={"success"}
+          openLoginForm={this.props.openLoginForm}
+        />
+
+        <AlertItem
+          message={this.state.registerFailure}
+          closeAlert={this.closeAlert}
+          severity={"error"}
         />
 
         <RegisterForm

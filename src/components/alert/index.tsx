@@ -8,8 +8,8 @@ import "../../index.css";
 import { IAlertProps } from '../types'
 
 const alertItem: React.FC<IAlertProps> = (props): JSX.Element => {
-  const { message, closeAlert, severity } = props;
-  console.log(props);
+
+  const { message, closeAlert, severity, openLoginForm } = props;
 
   return (
     <>
@@ -21,7 +21,7 @@ const alertItem: React.FC<IAlertProps> = (props): JSX.Element => {
         <Alert onClose={closeAlert} severity={severity}>
           {message}{" "}
           {severity === "success" && (
-            <span className="color form-option">Click here to Login</span>
+            <span className="color form-option" onClick={openLoginForm}>Click here to Login</span>
           )}
         </Alert>
       </Snackbar>

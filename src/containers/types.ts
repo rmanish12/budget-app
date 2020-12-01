@@ -1,6 +1,8 @@
 export interface ILoginContainerProps {
   openRegisterForm: React.MouseEventHandler<HTMLButtonElement>;
   onLogin: Function;
+  user: any
+  history: any
 }
 
 export interface INavbarContainerProps {
@@ -40,4 +42,8 @@ export interface IUserProfileProps {
     gender: string;
     dateOfBirth: string;
   };
+}
+
+export interface IHomeContainerProps {
+  authenticateUser: Function
 }
