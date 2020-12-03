@@ -10,7 +10,6 @@ const navbar: React.FC<INavbarContainerProps> = (props): JSX.Element => {
   const [isDrawerOpen, setDrawerOpen] = useState<boolean>(false);
 
   const toggleDrawer = (openStatus: boolean) => {
-      console.log('status : ', openStatus)
       setDrawerOpen(openStatus)
   }
 

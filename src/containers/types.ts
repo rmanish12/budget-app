@@ -41,9 +41,7 @@ export interface IUserProfileProps {
     email: string;
     gender: string;
     dateOfBirth: string;
+    userId: number
   };
 }
 
-export interface IHomeContainerProps {
-  authenticateUser: Function
-}

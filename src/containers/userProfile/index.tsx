@@ -10,6 +10,8 @@ import UserProfile from "../../components/userProfile";
 
 import { IUserProfileProps } from "../types";
 
+import AlertItem from "../../components/alert";
+
 const userProfile: React.FC<IUserProfileProps> = (props): JSX.Element => {
   const { getProfile } = props;
 
@@ -35,6 +37,18 @@ const userProfile: React.FC<IUserProfileProps> = (props): JSX.Element => {
   useEffect(() => {
     getProfile();
   }, []);
+
+  // update the state when fetching user detail is done
+  useEffect(() => {
+    setState({
+      ...state,
+      firstName: props.user.firstName,
+      lastName: props.user.lastName,
+      email: props.user.email,
+      gender: props.user.gender,
+      dateOfBirth: props.user.dateOfBirth,
+    });
+  }, [props.user]);
 
   // on change handler
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -75,15 +89,16 @@ const userProfile: React.FC<IUserProfileProps> = (props): JSX.Element => {
         firstName: false,
       },
     });
-    
+
     if (validateFields()) {
       // make API call to update profile
-      const user = _.omit(state, ["error"]);
-      console.log("user: ", user);
+      const user = _.omit(state, ["error", "email"]);
       const token = document.cookie.split("=")[1];
 
+      const userId = props.user.userId;
+
       axios
-        .put("/profile", user, {
+        .put(`/user/${userId}`, user, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -92,13 +107,31 @@ const userProfile: React.FC<IUserProfileProps> = (props): JSX.Element => {
           setUpdateSuccess(res.data.message);
         })
         .catch((err) => {
-          setUpdateFailure(err.response.data.error);
+          setUpdateFailure(err.response.data.message);
         });
     }
   };
 
+  // on close alert handler
+  const closeAlert = (e: React.MouseEvent<HTMLButtonElement>) => {
+    setUpdateSuccess("");
+    setUpdateFailure("");
+  };
+
   return (
     <>
+      <AlertItem
+        message={updateSuccess}
+        closeAlert={closeAlert}
+        severity={"success"}
+      />
+
+      <AlertItem
+        message={updateFailure}
+        closeAlert={closeAlert}
+        severity={"error"}
+      />
+
       <UserProfile
         state={state}
         onChangeHandler={onChangeHandler}

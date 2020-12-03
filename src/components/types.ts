@@ -10,6 +10,7 @@ export interface IAppProps {
     isAuthenticated: boolean;
     firstName: string;
   };
+  authenticateUser: Function
 }
 
 export interface IAlertProps {

@@ -3,15 +3,7 @@ import { connect } from 'react-redux'
 
 import { authenticateUser } from '../../store/actions/user'
 
-import { IHomeContainerProps } from '../types'
-
-const home: React.FC<IHomeContainerProps> = (props): JSX.Element => {
-
-    const { authenticateUser } = props
-
-    useEffect(() => {
-        authenticateUser()
-    }, [])
+const home = (props): JSX.Element => {
 
     return (
         <>
@@ -20,10 +12,4 @@ const home: React.FC<IHomeContainerProps> = (props): JSX.Element => {
     )
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        authenticateUser: () => dispatch(authenticateUser())
-    }
-}
-
-export default connect(null, mapDispatchToProps)(home)
+export default home

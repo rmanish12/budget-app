@@ -15,6 +15,8 @@ import {
   UpdateProfile
 } from "./types";
 
+import store from '../../../store'
+
 export const onLogin = (user: User) => (dispatch) => {
   
   axios
@@ -81,8 +83,10 @@ export const authenticateUser = () => dispatch => {
 export const getProfile = () => (dispatch) => {
   const token = document.cookie.split("=")[1];
 
+  const userId = store.getState().user.userId
+
   axios
-    .get("/profile", {
+    .get(`/user/${userId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

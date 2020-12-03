@@ -23,7 +23,6 @@ const DIRECTION = "left";
 
 const sideDrawer: React.FC<ISideDrawerProps> = (props): JSX.Element => {
   const { toggleDrawer, isDrawerOpen, isAuthenticated, firstName } = props;
-  console.log('props: ', props)
   const list = () => (
     <>
       <div role="presentation" className="background">
