@@ -15,7 +15,7 @@ import SideDrawer from "../sideDrawer";
 import { INavbarComponentProps } from '../types'
 
 const navbar: React.FC<INavbarComponentProps> = (props): JSX.Element => {
-  const { isAuthenticated, toggleDrawer, isDrawerOpen, firstName } = props;
+  const { isAuthenticated, toggleDrawer, isDrawerOpen, firstName, onLogout } = props;
 
   return (
     <>
@@ -35,6 +35,7 @@ const navbar: React.FC<INavbarComponentProps> = (props): JSX.Element => {
             toggleDrawer={toggleDrawer}
             isDrawerOpen={isDrawerOpen}
             firstName={firstName}
+            onLogout={onLogout}
           />
 
           <Typography variant="h6" className="flex-1 all-caps">

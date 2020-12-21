@@ -22,7 +22,7 @@ import { ISideDrawerProps } from "../types";
 const DIRECTION = "left";
 
 const sideDrawer: React.FC<ISideDrawerProps> = (props): JSX.Element => {
-  const { toggleDrawer, isDrawerOpen, isAuthenticated, firstName } = props;
+  const { toggleDrawer, isDrawerOpen, isAuthenticated, firstName, onLogout } = props;
   const list = () => (
     <>
       <div role="presentation" className="background">
@@ -60,7 +60,7 @@ const sideDrawer: React.FC<ISideDrawerProps> = (props): JSX.Element => {
             <ListItemIcon>
               <ExitToAppIcon />
             </ListItemIcon>
-            <ListItemText primary={"LOGOUT"}></ListItemText>
+            <ListItemText primary={"LOGOUT"} onClick={onLogout}></ListItemText>
           </ListItem>
         </List>
       </div>

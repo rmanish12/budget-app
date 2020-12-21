@@ -3,6 +3,7 @@ import {
   LOGIN_FAILURE,
   GET_PROFILE_SUCCESS,
   GET_PROFILE_FAILURE,
+  LOGOUT
 } from "../../actions/actionTypes";
 
 interface IAction {
@@ -54,6 +55,9 @@ export default function userReducer(
         gender: action.payload.gender,
         dateOfBirth: action.payload.dateOfBirth,
       };
+
+    case LOGOUT:
+      return initialState
 
     default:
       return state;

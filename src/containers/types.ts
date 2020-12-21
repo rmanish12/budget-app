@@ -8,6 +8,7 @@ export interface ILoginContainerProps {
 export interface INavbarContainerProps {
   isAuthenticated: boolean;
   firstName: string;
+  onLogout: React.MouseEventHandler<HTMLDivElement>
 }
 
 export interface IRegisterState {

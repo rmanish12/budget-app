@@ -11,6 +11,7 @@ export interface IAppProps {
     firstName: string;
   };
   authenticateUser: Function
+  onLogout: React.MouseEventHandler<HTMLDivElement>
 }
 
 export interface IAlertProps {
@@ -35,6 +36,7 @@ export interface INavbarComponentProps {
   toggleDrawer: any;
   isDrawerOpen: boolean;
   firstName: string
+  onLogout: React.MouseEventHandler<HTMLDivElement>
 }
 
 export interface IRegisterComponentProps {
@@ -59,6 +61,7 @@ export interface ISideDrawerProps {
   isDrawerOpen: boolean;
   isAuthenticated: boolean;
   firstName: string
+  onLogout: React.MouseEventHandler<HTMLDivElement>
 }
 
 export interface IUserProfileComponentProps {

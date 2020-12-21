@@ -5,7 +5,7 @@ import Navbar from "../../components/navbar";
 import { INavbarContainerProps } from '../types'
 
 const navbar: React.FC<INavbarContainerProps> = (props): JSX.Element => {
-  const { isAuthenticated, firstName } = props;
+  const { isAuthenticated, firstName, onLogout } = props;
 
   const [isDrawerOpen, setDrawerOpen] = useState<boolean>(false);
 
@@ -20,6 +20,7 @@ const navbar: React.FC<INavbarContainerProps> = (props): JSX.Element => {
         toggleDrawer={toggleDrawer}
         isDrawerOpen={isDrawerOpen}
         firstName={firstName}
+        onLogout={onLogout}
       />
     </>
   );

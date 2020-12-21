@@ -14,10 +14,10 @@ import ProtectedRoute from "./ProtectedRoute";
 
 import { IAppProps } from "./types";
 
-import { authenticateUser } from "../store/actions/user";
+import { authenticateUser, onLogout } from "../store/actions/user";
 
 const App: React.FC<IAppProps> = (props): JSX.Element => {
-  const { authenticateUser } = props;
+  const { authenticateUser, onLogout } = props;
 
   useEffect(() => {
     authenticateUser();
@@ -27,7 +27,7 @@ const App: React.FC<IAppProps> = (props): JSX.Element => {
 
   return (
     <>
-      <Navbar isAuthenticated={isAuthenticated} firstName={firstName} />
+      <Navbar isAuthenticated={isAuthenticated} firstName={firstName} onLogout={onLogout}/>
       <Switch>
         <Route
           path="/"
@@ -59,6 +59,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     authenticateUser: () => dispatch(authenticateUser()),
+    onLogout: () => dispatch(onLogout())
   };
 };
 

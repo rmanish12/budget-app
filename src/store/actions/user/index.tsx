@@ -4,7 +4,8 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
   GET_PROFILE_SUCCESS,
-  GET_PROFILE_FAILURE
+  GET_PROFILE_FAILURE,
+  LOGOUT
 } from "../actionTypes";
 
 import {
@@ -116,3 +117,15 @@ export const getProfile = () => (dispatch) => {
       dispatch(action);
     });
 };
+
+export const onLogout = () => dispatch => {
+
+  // remove sessionToken from cookie
+  document.cookie = "sessionToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+
+  dispatch({
+    type: LOGOUT
+  })
+
+  location.reload()
+}
