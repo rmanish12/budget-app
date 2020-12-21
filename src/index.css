@@ -43,6 +43,10 @@ label {
     margin-top: 2% !important;
 }
 
+.mt-1 {
+    margin-top: 1% !important;
+}
+
 .pd-4 {
     padding-bottom: 4%;
 }
@@ -61,6 +65,10 @@ label {
 
 .mb-10{
     margin-bottom: 10px !important;
+}
+
+.ml-30 {
+    margin-left: 30% !important;
 }
 
 .form-border {
@@ -141,4 +149,59 @@ a {
 
 .MuiListItem-root {
     font-style: italic;
+}
+
+.total-budget {
+    background-image: url('./assets/images/back.png');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    padding-top: 2%;
+    min-height: 200px;
+}
+
+.budget-title {
+    color: white;
+    font-size: xx-large;
+    font-weight: bold;
+    font-style: italic;
+    margin-left: 15%;
+}
+
+.budget-value {
+    font-weight: 300;
+    font-size: xx-large;
+    color: white;
+    float: right;
+    margin-right: 20%;
+}
+
+.budget-income-text {
+    color: #b3ffb3 !important;
+    font-style: italic !important;
+}
+
+.budget-expense-text {
+    color: #ffb3b3 !important;
+    font-style: italic !important;
+}
+
+.loading-div {
+    background-color: white;
+    margin-left: 30%;
+    margin-right: 30%;
+    margin-top: 2%;
+    min-height: 100px;
+}
+
+.loader-div {
+    margin-left: 45%;
+    margin-right: 45%;
+    padding-top: 4%
+}
+
+.error-div {
+    padding-top: 5%;
+    margin-left: 25%;
+    color: red;
 }

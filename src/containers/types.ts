@@ -46,3 +46,7 @@ export interface IUserProfileProps {
   };
 }
 
+export interface IHomeContainerProps {
+  getMonthlyBudgetOverview: Function,
+  budget: any
+}

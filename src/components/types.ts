@@ -89,3 +89,13 @@ export interface IChangePasswordComponentProps {
   onChangeHandler: React.ChangeEventHandler<HTMLInputElement>,
   onFormSubmit: React.MouseEventHandler<HTMLButtonElement>
 }
+
+export interface IHomeComponentProps {
+  getMonthlyBudgetOverview: Function,
+  budget: any
+}
+
+export interface ITotalBudgetComponentProps {
+  getMonthlyBudgetOverview: Function,
+  monthlyBudget: any
+}

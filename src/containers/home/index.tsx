@@ -1,15 +1,33 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 
-import { authenticateUser } from '../../store/actions/user'
+import { getMonthlyBudgetOverview } from '../../store/actions/budget'
 
-const home = (props): JSX.Element => {
+import HomeComponent from '../../components/home'
+
+import { IHomeContainerProps } from '../types'
+
+const home: React.FC<IHomeContainerProps> = (props): JSX.Element => {
+
+    const { getMonthlyBudgetOverview, budget } = props
 
     return (
         <>
-            Home page
+            <HomeComponent getMonthlyBudgetOverview={getMonthlyBudgetOverview} budget={budget}/>
         </>
     )
 }
 
-export default home
+const mapStateToProps = state => {
+    return {
+        budget: state.budget
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        getMonthlyBudgetOverview: () => dispatch(getMonthlyBudgetOverview())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(home)
