@@ -205,3 +205,36 @@ a {
     margin-left: 25%;
     color: red;
 }
+
+.MuiAppBar-colorPrimary {
+    background-color: teal !important;
+}
+
+.right-align {
+    text-align: right;
+}
+
+.add-new-item {
+    margin-right: 10px !important;
+    border: 2px teal solid !important;
+    color: teal !important;
+    background-color: white !important;
+}
+
+.save-item-button {
+    background-color: teal !important;
+    width: 150px !important;
+    color: white !important;
+}
+
+.save-item-button:hover {
+    border: 2px teal solid !important;
+    color: teal !important;
+    background-color: white !important;
+}
+
+.delete-item {
+    text-align: right;
+    width: 90%;
+    margin-top: 40px;
+}
