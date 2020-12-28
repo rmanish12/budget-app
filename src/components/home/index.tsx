@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import TotalBudget from "./totalBudget";
 import AddItem from "../../containers/home/addItem"
+import ViewItem from "../../containers/home/viewItem"
 
 import { IHomeComponentProps } from "../types";
 
@@ -39,7 +40,7 @@ const homeComponent: React.FC<IHomeComponentProps> = (props): JSX.Element => {
       </TabPanel>
 
       <TabPanel value={value} index={1} className="tabs">
-        Item 2
+        <ViewItem />
       </TabPanel>
 
       <TabPanel value={value} index={2} className="tabs">

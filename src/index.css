@@ -264,3 +264,9 @@ a {
 .error-background-color {
     background-color: #ffb3b3;
 }
+
+.search-bar-buttons {
+    background-color: teal;
+    color: white;
+    width: 85%;
+}

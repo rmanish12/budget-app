@@ -14,3 +14,17 @@ export function formatDate(fullDate) {
     const formattedDate = `${year}-${month}-${date}`;
     return formattedDate;
 }
+
+export function getFirstAndLastDate() {
+  const date = new Date();
+  const firstDate = new Date(date.getFullYear(), date.getMonth(), 1);
+  const lastDate = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+
+  const startDate = formatDate(firstDate);
+  const endDate = formatDate(lastDate);
+
+  return {
+    startDate,
+    endDate,
+  };
+}
