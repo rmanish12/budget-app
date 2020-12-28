@@ -4,6 +4,23 @@ import {
   GET_BUDGET_TYPES_LOADING,
 } from "../../actions/actionTypes";
 
+interface type {
+  id: number;
+  type: string;
+}
+
+interface IBudgetTypeReducerState {
+  budgetTypes: type[];
+  isError: boolean;
+  error: string;
+  isLoading: boolean;
+}
+
+interface IAction {
+  type: string;
+  payload: any;
+}
+
 const initialState = {
   budgetTypes: [],
   isError: false,
@@ -11,7 +28,10 @@ const initialState = {
   isLoading: false,
 };
 
-export default function budgetTypeReducer(state = initialState, action) {
+export default function budgetTypeReducer(
+  state: IBudgetTypeReducerState = initialState,
+  action: IAction
+) {
   switch (action.type) {
     case GET_BUDGET_TYPES_LOADING:
       return {

@@ -6,6 +6,8 @@ import {
   GET_CATEGORIES_FAILURE,
 } from "../actionTypes";
 
+import { GetCategoriesSuccessAction, GetCategoriesFailureAction } from "./types"
+
 export const getCategories = () => (dispatch) => {
   const token = document.cookie.split("=")[1];
   const header = {
@@ -21,7 +23,7 @@ export const getCategories = () => (dispatch) => {
   axios
     .get("/category", header)
     .then((res) => {
-      const action = {
+      const action: GetCategoriesSuccessAction = {
         type: GET_CATEGORIES_SUCCESS,
         payload: {
           income: res.data.income,
@@ -32,7 +34,7 @@ export const getCategories = () => (dispatch) => {
       dispatch(action);
     })
     .catch((err) => {
-      const action = {
+      const action: GetCategoriesFailureAction = {
         type: GET_CATEGORIES_FAILURE,
         payload: {
           error: err.response.data.messgae,

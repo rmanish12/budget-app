@@ -238,3 +238,29 @@ a {
     width: 90%;
     margin-top: 40px;
 }
+
+.dialog-success-button {
+    background-color: #b3ffb3;
+    color: black;
+    border: white solid 1px;
+    font-style: italic;
+}
+
+.dialog-error-button {
+    background-color: #ffb3b3;
+    color: black;
+    border: white solid 1px;
+    font-style: italic;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.success-background-color {
+    background-color: #b3ffb3;
+}
+
+.error-background-color {
+    background-color: #ffb3b3;
+}

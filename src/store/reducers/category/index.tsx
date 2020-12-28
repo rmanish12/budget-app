@@ -4,6 +4,25 @@ import {
   GET_CATEGORIES_FAILURE,
 } from "../../actions/actionTypes";
 
+interface category {
+  id: number;
+  name: string;
+}
+interface ICategoryReducerState {
+  categories: {
+    income: category[];
+    expense: category[];
+  };
+  isLoading: boolean;
+  isError: boolean;
+  error: string;
+}
+
+interface IAction {
+  type: string;
+  payload: any;
+}
+
 const initialState = {
   categories: {
     income: [],
@@ -14,7 +33,10 @@ const initialState = {
   error: "",
 };
 
-export default function categoryReducer(state = initialState, action) {
+export default function categoryReducer(
+  state: ICategoryReducerState = initialState,
+  action: IAction
+) {
   switch (action.type) {
     case GET_CATEGORIES_LOADING:
       return {
@@ -41,6 +63,6 @@ export default function categoryReducer(state = initialState, action) {
       };
 
     default:
-      return { ...state }
+      return { ...state };
   }
 }

@@ -5,6 +5,8 @@ import {
   GET_BUDGET_TYPES_LOADING,
 } from "../actionTypes";
 
+import { GetTypesSuccessAction, GetTypesFailureAction } from "./types"
+
 export const getBudgetTypes = () => (dispatch) => {
   const token = document.cookie.split("=")[1];
   const header = {
@@ -20,7 +22,7 @@ export const getBudgetTypes = () => (dispatch) => {
   axios
     .get("/types", header)
     .then((res) => {
-      const action = {
+      const action: GetTypesSuccessAction = {
         type: GET_BUDGET_TYPES_SUCCESS,
         payload: {
           budgetTypes: res.data.budgetTypes,
@@ -30,7 +32,7 @@ export const getBudgetTypes = () => (dispatch) => {
       dispatch(action);
     })
     .catch((err) => {
-      const action = {
+      const action: GetTypesFailureAction = {
         type: GET_BUDGET_TYPES_FAILURE,
         payload: {
           error: err.response.data.messgae,

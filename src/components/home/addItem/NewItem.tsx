@@ -17,7 +17,9 @@ import { Card } from "react-bootstrap";
 
 import "../../../index.css";
 
-const newItem = (props) => {
+import { INewItemContainerProps } from "../../types"
+
+const newItem: React.FC<INewItemContainerProps> = (props): JSX.Element => {
   const { item, index, onDeleteItemHandler, types, onChangeHandler } = props;
 
   const { dateOfTransaction, categories, type, category, amount, description } = item;

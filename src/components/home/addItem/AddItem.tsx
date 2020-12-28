@@ -9,10 +9,10 @@ import { Card, Button } from "react-bootstrap";
 
 import "../../../index.css";
 
-const addItemComponent = (props) => {
-  const { state, onAddItemHandler, onDeleteItemHandler, types, onChangeHandler, onSaveItemHandler } = props;
+import { IAddComponentProps } from "../../types"
 
-  const { items } = state;
+const addItemComponent: React.FC<IAddComponentProps> = (props): JSX.Element => {
+  const { items, onAddItemHandler, onDeleteItemHandler, types, onChangeHandler, onSaveItemHandler } = props;
 
   return (
     <>

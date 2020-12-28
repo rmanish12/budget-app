@@ -66,7 +66,7 @@ const totalBudget: React.FC<ITotalBudgetComponentProps> = (
               </span>
               <span
                 className={
-                  total
+                  total >= 0
                     ? "budget-value budget-income-text"
                     : "budget-value budget-expense-text"
                 }

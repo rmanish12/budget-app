@@ -1,9 +1,12 @@
 import React from "react";
 
 import { Modal, Button } from "react-bootstrap";
+import "../../index.css";
 
-const dialogBox = (props) => {
-  const { heading, message } = props;
+import { IDialogBoxComponentProps } from "../types"
+
+const dialogBox: React.FC<IDialogBoxComponentProps> = (props): JSX.Element => {
+  const { heading, message, level, onHide } = props;
   return (
     <>
       <Modal
@@ -12,16 +15,33 @@ const dialogBox = (props) => {
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
+        <Modal.Header
+          className={
+            level === "success"
+              ? "success-background-color"
+              : "error-background-color"
+          }
+          closeButton
+        >
+          <Modal.Title id="contained-modal-title-vcenter" className="italic">
             {heading}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <span>{message}</span>
+          <span className="italic">{message}</span>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={props.onHide}>Close</Button>
+          <Button
+            variant="light"
+            onClick={onHide}
+            className={
+              level === "success"
+                ? "dialog-success-button"
+                : "dialog-error-button"
+            }
+          >
+            Close
+          </Button>
         </Modal.Footer>
       </Modal>
     </>

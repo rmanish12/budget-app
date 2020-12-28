@@ -2,9 +2,6 @@ import {
   GET_MONTHLY_BUDGET_OVERVIEW_SUCCESS,
   GET_MONTHLY_BUDGET_OVERVIEW_FAILURE,
   GET_MONTHLY_BUDGET_OVERVIEW_LOADING,
-  ADD_BUDGET_ITEMS_REQUEST,
-  ADD_BUDGET_ITEMS_SUCCESS,
-  ADD_BUDGET_ITEMS_FAILURE
 } from "../../actions/actionTypes";
 
 interface IBudgetReducerState {
@@ -82,40 +79,6 @@ export default function budgetReducer(
           errorMessage: action.payload.error,
         },
       };
-
-    case ADD_BUDGET_ITEMS_REQUEST:
-      return {
-        ...state,
-        addItem: {
-          ...state.addItem,
-          isLoading: true
-        }
-      }
-
-    case ADD_BUDGET_ITEMS_SUCCESS:
-      return {
-        ...state,
-        addItem: {
-          ...state.addItem,
-          isSuccess: true,
-          success: action.payload.success,
-          isLoading: false,
-          isError: false
-        }
-      }
-
-    case ADD_BUDGET_ITEMS_FAILURE:
-      return {
-        ...state,
-        addItem: {
-          ...state.addItem,
-          isSuccess: false,
-          success: "",
-          isError: true,
-          error: action.payload.error,
-          isLoading: false
-        }
-      }
 
     default:
       return { ...state };

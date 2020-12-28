@@ -99,3 +99,28 @@ export interface ITotalBudgetComponentProps {
   getMonthlyBudgetOverview: Function,
   monthlyBudget: any
 }
+
+export interface IDialogBoxComponentProps {
+  heading: string,
+  message: string,
+  level: string,
+  onHide: React.MouseEventHandler<HTMLButtonElement>,
+  show: boolean
+}
+
+export interface IAddComponentProps {
+  items: any[],
+  types: any,
+  onAddItemHandler: any,
+  onSaveItemHandler: any,
+  onDeleteItemHandler: any,
+  onChangeHandler: any
+}
+
+export interface INewItemContainerProps {
+  item: any,
+  index: number,
+  types: any,
+  onDeleteItemHandler: React.MouseEventHandler<HTMLDivElement>,
+  onChangeHandler: any
+}

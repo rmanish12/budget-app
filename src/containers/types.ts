@@ -50,3 +50,12 @@ export interface IHomeContainerProps {
   getMonthlyBudgetOverview: Function,
   budget: any
 }
+
+export interface IAddItemContainerProps {
+  type: any,
+  category: any,
+  user: any,
+  getBudgetTypes: Function,
+  getCategories: Function,
+  getMonthlyBudgetOverview: Function
+}

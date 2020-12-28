@@ -5,9 +5,6 @@ import {
   GET_MONTHLY_BUDGET_OVERVIEW_SUCCESS,
   GET_MONTHLY_BUDGET_OVERVIEW_FAILURE,
   GET_MONTHLY_BUDGET_OVERVIEW_LOADING,
-  ADD_BUDGET_ITEMS_REQUEST,
-  ADD_BUDGET_ITEMS_SUCCESS,
-  ADD_BUDGET_ITEMS_FAILURE,
 } from "../actionTypes";
 
 import {
@@ -52,45 +49,5 @@ export const getMonthlyBudgetOverview = () => (dispatch) => {
       };
 
       dispatch(action);
-    });
-};
-
-export const addBudgetItems = (allItems) => (dispatch) => {
-  const userId = store.getState().user.userId;
-  const items = {
-    userId,
-    budgetItems: allItems,
-  };
-
-  const token = document.cookie.split("=")[1];
-  const header = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
-
-  dispatch({
-    type: ADD_BUDGET_ITEMS_REQUEST,
-  });
-
-  axios
-    .post("/budget", items, header)
-    .then((res) => {
-      const action = {
-        type: ADD_BUDGET_ITEMS_SUCCESS,
-        payload: {
-          success: res.data.message,
-        },
-      };
-
-      dispatch(action);
-    })
-    .catch((err) => {
-      const action = {
-        type: ADD_BUDGET_ITEMS_FAILURE,
-        payload: {
-          error: err.response.data.message,
-        },
-      };
     });
 };

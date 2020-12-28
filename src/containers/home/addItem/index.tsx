@@ -10,12 +10,15 @@ import { formatDate } from "../../../util/formatDate";
 
 import { getBudgetTypes } from "../../../store/actions/types";
 import { getCategories } from "../../../store/actions/category";
-import { addBudgetItems } from "../../../store/actions/budget";
+import { getMonthlyBudgetOverview } from "../../../store/actions/budget"
 
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-const addItem = (props) => {
-  const { type, getBudgetTypes, category, getCategories, user } = props;
+import { IAddItemContainerProps } from "../../types"
+
+const addItem: React.FC<IAddItemContainerProps> = (props): JSX.Element => {
+
+  const { type, category, user, getBudgetTypes, getCategories, getMonthlyBudgetOverview } = props
 
   const { userId } = user;
 
@@ -105,17 +108,17 @@ const addItem = (props) => {
   const onSaveItemHandler = (e) => {
     const { items } = state;
 
+    let budgetItems = [];
     // not working, need to be checked
-    const refinedItems = _.forEach(items, (item) => {
-      _.omit(item, ["categories"]);
+    _.forEach(items, (item) => {
+      budgetItems.push(_.omit(item, ["categories"]));
     });
 
     const allItems = {
       userId,
-      budgetItems: refinedItems,
+      budgetItems,
     };
 
-    console.log("allItems: ", allItems);
     const token = document.cookie.split("=")[1];
 
     const header = {
@@ -137,12 +140,16 @@ const addItem = (props) => {
       .then((res) => {
         setState({
           ...state,
+          items: [NEW_ITEM], // clearing all previously entered item boxes
           addItemsResponse: {
             ...state.addItemsResponse,
             isLoading: false,
             success: res.data.message,
           },
         });
+
+        // calling API to update monthly budget overview
+        getMonthlyBudgetOverview()
       })
       .catch((err) => {
         setState({
@@ -171,8 +178,7 @@ const addItem = (props) => {
     <>
       <>
         <DialogBox
-          show={state.addItemsResponse.success || state.addItemsResponse.error}
-          // show={true}
+          show={(state.addItemsResponse.success || state.addItemsResponse.error) ? true : false}
           heading={state.addItemsResponse.success ? "Success" : "Error"}
           message={
             state.addItemsResponse.success
@@ -180,6 +186,7 @@ const addItem = (props) => {
               : state.addItemsResponse.error
           }
           onHide={handleClose}
+          level={state.addItemsResponse.success ? "success" : "error"}
         />
       </>
       {type.isLoading ||
@@ -197,7 +204,7 @@ const addItem = (props) => {
         <>
           {" "}
           <AddItemComponent
-            state={state}
+            items={state.items}
             onAddItemHandler={onAddItemHandler}
             onDeleteItemHandler={onDeleteItemHandler}
             types={type}
@@ -222,7 +229,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getBudgetTypes: () => dispatch(getBudgetTypes()),
     getCategories: () => dispatch(getCategories()),
-    addBudgetItems: (items) => dispatch(addBudgetItems(items)),
+    getMonthlyBudgetOverview: () => dispatch(getMonthlyBudgetOverview())
   };
 };
 
