@@ -64,7 +64,7 @@ const searchItem = (props) => {
                   variant="light"
                   className="search-bar-buttons"
                 >
-                  <SaveAltIcon /> Export Excel
+                  <SaveAltIcon /> Export
                 </Button>
               </div>
             </Grid>
