@@ -11,6 +11,8 @@ import { Grid } from "@material-ui/core";
 
 import { getBudgetItems } from "../../../store/actions/budget";
 
+import { BUDGET_ITEM } from "../../../util/constants"
+
 const viewItem = (props) => {
   const { budget, getBudgetItems } = props;
   const { budgetItems } = budget;
@@ -25,8 +27,8 @@ const viewItem = (props) => {
       toDate: endDate,
     },
     items: {
-      income: [],
-      expense: [],
+      income: BUDGET_ITEM,
+      expense: BUDGET_ITEM,
     },
   });
 
@@ -44,7 +46,10 @@ const viewItem = (props) => {
       ...state,
       items: {
         ...state.items,
-        income: items,
+        income: {
+          ...state.items.income,
+          items: items
+        },
       },
     });
   }, [budgetItems.income.items]);
@@ -61,7 +66,10 @@ const viewItem = (props) => {
       ...state,
       items: {
         ...state.items,
-        expense: items,
+        expense: {
+          ...state.items.expense,
+          items: items
+        },
       },
     });
   }, [budgetItems.expense.items]);
@@ -77,6 +85,51 @@ const viewItem = (props) => {
         ...state.dates,
         [name]: value,
       },
+    });
+  };
+
+  // handler when user clicks on check box of a particular item
+  const onCheckedChange = (e, type, index) => {
+    const newBudgetItems = { ...state.items[type] };
+    const allItems = newBudgetItems.items;
+    const item = allItems[index];
+
+    item.isChecked = e.target.checked;
+
+    const itemsSelected = allItems.filter((item) => item.isChecked === true);
+    setState({
+      ...state,
+      items: {
+        ...state.items,
+        [type]: {
+          ...state.items[type],
+          numberOfItemsSelected: itemsSelected.length,
+          allItemsSelected: itemsSelected.length === allItems.length ? true: false,
+          items: allItems,
+        }
+      },
+    });
+  };
+
+  // handler when user clicks on the checkbox on table header to select all items
+  const onCheckAllItems = (e, type) => {
+    const newBudgetItems = { ...state.items[type] };
+
+    newBudgetItems.allItemsSelected = e.target.checked;
+    newBudgetItems.items.forEach((item) => (item.isChecked = e.target.checked));
+
+    if (e.target.checked) {
+      newBudgetItems.numberOfItemsSelected = newBudgetItems.items.length;
+    } else {
+      newBudgetItems.numberOfItemsSelected = 0;
+    }
+
+    setState({
+      ...state,
+      items: {
+        ...state.items,
+        [type]: newBudgetItems 
+      }
     });
   };
 
@@ -117,8 +170,10 @@ const viewItem = (props) => {
                   className={`${type}-table`}
                   label={type.toUpperCase()}
                   type={type}
-                  items={state.items[type]}
+                  itemDetails={state.items[type]}
                   totalCount={budgetItems[type].totalCount}
+                  onCheckedChange={onCheckedChange}
+                  onCheckAllItems={onCheckAllItems}
                   // paginationParams={paginationParams[type]}
                   // paginationSize={PAGINATION_SIZE}
                   // onRowsPerPageChange={onRowsPerPageChange}

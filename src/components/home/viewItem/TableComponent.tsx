@@ -13,11 +13,22 @@ import {
   Tooltip,
 } from "@material-ui/core";
 import EditTwoToneIcon from "@material-ui/icons/EditTwoTone";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 import "../../../index.css";
 
 const tableComponent = (props) => {
-  const { label, className, items, totalCount } = props;
+  const {
+    label,
+    className,
+    itemDetails,
+    totalCount,
+    type,
+    onCheckedChange,
+    onCheckAllItems,
+  } = props;
+
+  const { items, numberOfItemsSelected, allItemsSelected } = itemDetails;
 
   return (
     <>
@@ -26,13 +37,13 @@ const tableComponent = (props) => {
         <Table className={className}>
           <TableHead>
             <TableRow
-            //   className={numberOfItemsSelected > 0 ? "row-selected" : ""}
+              className={numberOfItemsSelected > 0 ? "row-selected" : ""}
             >
               <TableCell>
-                {/* <Checkbox
+                <Checkbox
                   checked={allItemsSelected}
                   onChange={(e) => onCheckAllItems(e, type)}
-                /> */}
+                />
               </TableCell>
               <TableCell>
                 Date{" "}
@@ -54,16 +65,18 @@ const tableComponent = (props) => {
                 </Tooltip> */}
               </TableCell>
               <TableCell>
-                {/* {numberOfItemsSelected > 0 && (
+                {numberOfItemsSelected > 0 && (
                   <>
                     <Tooltip title="Delete item">
                       <div>
-                        <DeleteIcon onClick={(e) => onDeleteItems(e, type)} />
+                        <DeleteIcon
+                        // onClick={(e) => onDeleteItems(e, type)}
+                        />
                         <span>{numberOfItemsSelected}</span>
                       </div>
                     </Tooltip>
                   </>
-                )} */}
+                )}
               </TableCell>
             </TableRow>
           </TableHead>
@@ -76,7 +89,7 @@ const tableComponent = (props) => {
                 <TableCell>
                   <Checkbox
                     checked={item.isChecked}
-                    // onChange={(e) => onCheckedChange(e, type, index)}
+                    onChange={(e) => onCheckedChange(e, type, index)}
                   />
                 </TableCell>
                 <TableCell align="left">

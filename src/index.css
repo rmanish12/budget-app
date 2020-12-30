@@ -285,3 +285,7 @@ a {
 .expense-table {
     background-color: #ffb3b3;
 }
+
+.row-selected {
+    background-color: #ffcc99;
+}
