@@ -46,6 +46,7 @@
     "axios": "^0.21.0",
     "bootstrap": "^4.5.3",
     "lodash": "^4.17.20",
+    "moment": "^2.29.1",
     "react": "^17.0.1",
     "react-autobind": "^1.0.6",
     "react-bootstrap": "^1.4.0",

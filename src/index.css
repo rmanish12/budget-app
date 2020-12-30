@@ -270,3 +270,18 @@ a {
     color: white;
     width: 85%;
 }
+
+.label {
+    text-align: center;
+    font-size: larger;
+    margin-bottom: 1%;
+    margin-top: 5%;
+}
+
+.income-table {
+    background-color: #b3ffb3;
+}
+
+.expense-table {
+    background-color: #ffb3b3;
+}
