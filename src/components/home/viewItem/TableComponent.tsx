@@ -15,6 +15,8 @@ import {
 import EditTwoToneIcon from "@material-ui/icons/EditTwoTone";
 import DeleteIcon from "@material-ui/icons/Delete";
 
+import Pagination from "./Pagination"
+
 import "../../../index.css";
 
 const tableComponent = (props) => {
@@ -24,8 +26,13 @@ const tableComponent = (props) => {
     itemDetails,
     totalCount,
     type,
+    paginationSize,
+    paginationParams,
     onCheckedChange,
     onCheckAllItems,
+    onRowsPerPageChange,
+    onPreviousPage,
+    onNextPage
   } = props;
 
   const { items, numberOfItemsSelected, allItemsSelected } = itemDetails;
@@ -112,7 +119,7 @@ const tableComponent = (props) => {
         </Table>
       </TableContainer>
 
-      {/* {items.length !== 0 && (
+      {items.length !== 0 && (
         <Pagination
           paginationSize={paginationSize}
           paginationParams={paginationParams}
@@ -125,13 +132,13 @@ const tableComponent = (props) => {
         />
       )}
 
-      <DeleteModal
+      {/* <DeleteModal
         show={showDeleteModal}
         handleClose={handleClose}
         onConfirmDelete={onConfirmDelete}
-      /> */}
+      />  */}
     </>
   );
 };
 
-export default tableComponent;
+export default React.memo(tableComponent);

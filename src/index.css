@@ -289,3 +289,22 @@ a {
 .row-selected {
     background-color: #ffcc99;
 }
+
+.pagination-label {
+    margin-right: 30px;
+    font-size: smaller;
+}
+
+.pagination-dropdown {
+    margin-right: 40px;
+}
+
+.pagination-previous {
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.pagination-next {
+    margin-right: 15px;
+    cursor: pointer;
+}

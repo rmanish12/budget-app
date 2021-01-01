@@ -11,7 +11,11 @@ import { Grid } from "@material-ui/core";
 
 import { getBudgetItems } from "../../../store/actions/budget";
 
-import { BUDGET_ITEM } from "../../../util/constants"
+import {
+  BUDGET_ITEM,
+  PAGINATION_SIZE,
+  DEFAULT_QUERY_PARAMS,
+} from "../../../util/constants";
 
 const viewItem = (props) => {
   const { budget, getBudgetItems } = props;
@@ -29,6 +33,10 @@ const viewItem = (props) => {
     items: {
       income: BUDGET_ITEM,
       expense: BUDGET_ITEM,
+    },
+    queryParams: {
+      income: DEFAULT_QUERY_PARAMS,
+      expense: DEFAULT_QUERY_PARAMS,
     },
   });
 
@@ -48,7 +56,9 @@ const viewItem = (props) => {
         ...state.items,
         income: {
           ...state.items.income,
-          items: items
+          items: items,
+          numberOfItemsSelected: 0,
+          allItemsSelected: false,
         },
       },
     });
@@ -59,7 +69,9 @@ const viewItem = (props) => {
     const expenseItems = budgetItems.expense.items;
     let items = [];
 
-    _.forEach(expenseItems, (item) => items.push(_.assign(item, { isChecked: false })));
+    _.forEach(expenseItems, (item) =>
+      items.push(_.assign(item, { isChecked: false }))
+    );
 
     // setting state to update items list with isChecked property
     setState({
@@ -68,17 +80,41 @@ const viewItem = (props) => {
         ...state.items,
         expense: {
           ...state.items.expense,
-          items: items
+          items: items,
         },
       },
     });
   }, [budgetItems.expense.items]);
 
+  // calling get budget items API whenever queryParams for income changes
+  useEffect(() => {
+    const incomeParams = _.clone(state.queryParams.income);
+
+    // to prevent API call on page load
+    if (!_.isEqual(incomeParams, DEFAULT_QUERY_PARAMS)) {
+      incomeParams.type = "income";
+
+      getBudgetItems(incomeParams);
+    }
+  }, [state.queryParams.income]);
+
+  // calling get budget items API whenever queryParams expense changes
+  useEffect(() => {
+    const expenseParams = _.clone(state.queryParams.expense);
+
+    // to prevent API call on page load
+    if (!_.isEqual(expenseParams, DEFAULT_QUERY_PARAMS)) {
+      expenseParams.type = "expense";
+
+      getBudgetItems(expenseParams);
+    }
+  }, [state.queryParams.expense]);
+
   // on date change handler
   const onDateChangeHandler = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    console.log("name: ", name, "value: ", value);
+
     setState({
       ...state,
       dates: {
@@ -104,9 +140,10 @@ const viewItem = (props) => {
         [type]: {
           ...state.items[type],
           numberOfItemsSelected: itemsSelected.length,
-          allItemsSelected: itemsSelected.length === allItems.length ? true: false,
+          allItemsSelected:
+            itemsSelected.length === allItems.length ? true : false,
           items: allItems,
-        }
+        },
       },
     });
   };
@@ -128,28 +165,89 @@ const viewItem = (props) => {
       ...state,
       items: {
         ...state.items,
-        [type]: newBudgetItems 
-      }
+        [type]: newBudgetItems,
+      },
     });
+  };
+
+  // handler when number of items per page is changed
+  const onRowsPerPageChange = (e, type) => {
+    const params = _.clone(state.queryParams[type]);
+    params.page = 0;
+    params.limit = e.target.value;
+
+    setState({
+      ...state,
+      queryParams: {
+        ...state.queryParams,
+        [type]: params,
+      },
+    });
+  };
+
+  // handler when user wants to move to previous page
+  const onPreviousPage = (type) => {
+    const page = state.queryParams[type].page;
+
+    if (page !== 0) {
+      // changing pagination params
+      setState({
+        ...state,
+        queryParams: {
+          ...state.queryParams,
+          [type]: {
+            ...state.queryParams[type],
+            page: page - 1,
+          },
+        },
+      });
+    }
+  };
+
+  // handler when user wants to move to next page
+  const onNextPage = (type) => {
+    const page = state.queryParams[type].page;
+    const limit = state.queryParams[type].limit;
+    const totalCount = budgetItems[type].totalCount;
+
+    if (page !== Math.ceil(totalCount / limit) - 1) {
+      // changing pagination params
+      setState({
+        ...state,
+        queryParams: {
+          ...state.queryParams,
+          [type]: {
+            ...state.queryParams[type],
+            page: page + 1,
+          },
+        },
+      });
+    }
   };
 
   // search handler
   const onSearchHandler = (e) => {
     e.preventDefault();
 
-    const params = {
-      fromDate: state.dates.fromDate,
-      toDate: state.dates.toDate,
-      sortBy: "dateOfTransaction",
-      orderBy: "desc",
-      page: 0,
-      limit: 5,
-    };
+    const queryParams = _.cloneDeep(DEFAULT_QUERY_PARAMS);
+    queryParams.fromDate = state.dates.fromDate;
+    queryParams.toDate = state.dates.toDate;
 
-    Promise.all[
-      (getBudgetItems(_.assign(params, { type: "income" })),
-      getBudgetItems(_.assign(params, { type: "expense" })))
-    ];
+    const incomeParams = _.clone(queryParams);
+    const expenseParams = _.clone(queryParams);
+
+    incomeParams.type = "income";
+    expenseParams.type = "expense";
+
+    // updating query params state
+    // this in turn will call the API due to useEffect() used
+    setState({
+      ...state,
+      queryParams: {
+        income: incomeParams,
+        expense: expenseParams,
+      },
+    });
   };
 
   return (
@@ -172,8 +270,13 @@ const viewItem = (props) => {
                   type={type}
                   itemDetails={state.items[type]}
                   totalCount={budgetItems[type].totalCount}
+                  paginationSize={PAGINATION_SIZE}
+                  paginationParams={state.queryParams[type]}
                   onCheckedChange={onCheckedChange}
                   onCheckAllItems={onCheckAllItems}
+                  onRowsPerPageChange={onRowsPerPageChange}
+                  onPreviousPage={onPreviousPage}
+                  onNextPage={onNextPage}
                   // paginationParams={paginationParams[type]}
                   // paginationSize={PAGINATION_SIZE}
                   // onRowsPerPageChange={onRowsPerPageChange}

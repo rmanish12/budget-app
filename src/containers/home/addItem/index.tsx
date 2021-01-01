@@ -24,7 +24,14 @@ const addItem: React.FC<IAddItemContainerProps> = (props): JSX.Element => {
 
   // calling method on component load to get all the budgetTypes
   useEffect(() => {
-    Promise.all([getBudgetTypes(), getCategories()]);
+    if(type.budgetTypes.length===0) {
+      getBudgetTypes()
+    }
+
+    if(category.categories.income.length===0 || category.categories.expense.length===0) {
+      getCategories()
+    }
+    // Promise.all([getBudgetTypes(), getCategories()]);
   }, []);
 
   // new item template
